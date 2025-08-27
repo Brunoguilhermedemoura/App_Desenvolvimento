@@ -5,6 +5,7 @@ export interface Task {
   completed: boolean;
   createdAt: string;
   priority: TaskPriority;
+  completedAt?: string | null;
 }
 
 export type TaskPriority = 'baixa' | 'média' | 'alta';
@@ -17,4 +18,5 @@ export interface CreateTaskData {
 
 export interface UpdateTaskData extends Partial<CreateTaskData> {
   completed?: boolean;
+  completedAt?: string | null;
 }

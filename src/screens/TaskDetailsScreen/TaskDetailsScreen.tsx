@@ -65,17 +65,31 @@ export const TaskDetailsScreen: React.FC = () => {
       setIsLoading(false);
     }
   };
-
   const handleToggleCompletion = async () => {
     if (!task) return;
-
+  
     try {
       await toggleTaskCompletion(task.id);
-      setTask({ ...task, completed: !task.completed });
+      
+      const newCompleted = !task.completed;
+      const completedAt = newCompleted ? new Date().toISOString() : null;
+  
+      setTask({ ...task, completed: newCompleted, completedAt });
     } catch (error) {
       console.error('Erro ao atualizar status:', error);
     }
   };
+  
+  // const handleToggleCompletion = async () => {
+  //   if (!task) return;
+
+  //   try {
+  //     await toggleTaskCompletion(task.id);
+  //     setTask({ ...task, completed: !task.completed });
+  //   } catch (error) {
+  //     console.error('Erro ao atualizar status:', error);
+  //   }
+  // };
 
   const handleDeleteTask = () => {
     if (!task) return;
@@ -255,6 +269,15 @@ export const TaskDetailsScreen: React.FC = () => {
                   {formatDate(task.createdAt)}
                 </ThemedText>
               </ThemedView>
+
+              {task.completedAt && (
+  <ThemedView style={styles.section}>
+    <ThemedText style={styles.sectionLabel}>Finalizada em</ThemedText>
+    <ThemedText style={styles.dateText}>
+      {formatDate(task.completedAt)}
+    </ThemedText>
+  </ThemedView>
+)}
             </>
           )}
         </ThemedView>
