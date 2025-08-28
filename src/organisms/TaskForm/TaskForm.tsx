@@ -2,9 +2,9 @@ import { ThemedView } from '@/components/ThemedView';
 import { Button, Input } from '@/src/atoms';
 import { PrioritySelector } from '@/src/molecules';
 import { CreateTaskData, TaskPriority } from '@/src/types';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
-
 export interface TaskFormProps {
   onSubmit: (taskData: CreateTaskData) => Promise<void>;
   onSuccess?: () => void;
@@ -32,29 +32,55 @@ export const TaskForm: React.FC<TaskFormProps> = ({
     return true;
   };
 
+  const navigation = useNavigation();
+  
   const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
+  
     try {
       await onSubmit({
         title: title.trim(),
         description: description.trim(),
         priority,
       });
-
-      // Limpar formulário após sucesso
+  
+      // Limpar formulário
       setTitle('');
       setDescription('');
       setPriority('média');
-      
+  
       onSuccess?.();
+      navigation.goBack();
+
     } catch (error) {
-      console.error('Erro ao criar tarefa:', error);
       Alert.alert('Erro', 'Não foi possível criar a tarefa. Tente novamente.');
     }
   };
+  
+  // const handleSubmit = async () => {
+  //   if (!validateForm()) {
+  //     return;
+  //   }
+
+  //   try {
+  //     await onSubmit({
+  //       title: title.trim(),
+  //       description: description.trim(),
+  //       priority,
+  //     });
+
+  //     // Limpar formulário após sucesso
+  //     setTitle('');
+  //     setDescription('');
+  //     setPriority('média');
+      
+  //     onSuccess?.();
+
+  //   } catch (error) {
+  //     console.error('Erro ao criar tarefa:', error);
+  //     Alert.alert('Erro', 'Não foi possível criar a tarefa. Tente novamente.');
+  //   }
+  // };
 
   const handleClear = () => {
     setTitle('');
@@ -108,6 +134,8 @@ export const TaskForm: React.FC<TaskFormProps> = ({
       </ThemedView>
     </ThemedView>
   );
+
+  
 };
 
 const styles = StyleSheet.create({
