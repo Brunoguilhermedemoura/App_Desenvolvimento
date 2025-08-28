@@ -22,7 +22,7 @@ export const AddTaskScreen: React.FC = () => {
       [
         {
           text: 'Ver Tarefas',
-          onPress: () => router.push('/(tabs)')
+          onPress: () => router.push('App de Tarefas')
         },
         {
           text: 'Criar Outra',
