@@ -32,21 +32,6 @@ export const TaskListScreen: React.FC = () => {
   });
 
   return (
-<<<<<<< HEAD
-    <PageTemplate
-      title="Minhas Tarefas"
-      subtitle={`${stats.pending} pendentes de ${stats.total}`}
-      showLogout={true}
-    >
-      <TaskList
-        tasks={tasks}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-        onToggleComplete={toggleTaskCompletion}
-        onDeleteTask={deleteTask}
-      />
-    </PageTemplate>
-=======
     <>
       <Modal
         animationType="fade"
@@ -71,11 +56,11 @@ export const TaskListScreen: React.FC = () => {
       <PageTemplate
         title={
           <Pressable onPress={handleTripleClick}>
-          <Text style={styles.titleText}>Minhas Tarefas</Text>
-        </Pressable>
-        
+            <Text style={styles.titleText}>Minhas Tarefas</Text>
+          </Pressable>
         }
         subtitle={`${stats.pending} pendentes de ${stats.total}`}
+        showLogout={true}
       >
         <TaskList
           tasks={tasks}
@@ -86,7 +71,6 @@ export const TaskListScreen: React.FC = () => {
         />
       </PageTemplate>
     </>
->>>>>>> 4f7f29dcad4f14a4f8855d2915cd47ca86c5f5a3
   );
 };
 

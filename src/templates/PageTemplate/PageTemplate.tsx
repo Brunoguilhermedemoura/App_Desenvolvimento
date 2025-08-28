@@ -6,7 +6,7 @@ import React from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 export interface PageTemplateProps {
-  title: string;
+  title: string | React.ReactNode;
   subtitle?: string;
   children: React.ReactNode;
   scrollable?: boolean;
@@ -38,7 +38,11 @@ export const PageTemplate: React.FC<PageTemplateProps> = ({
       <ThemedView style={styles.header}>
         <ThemedView style={styles.headerContent}>
           <ThemedView style={styles.titleContainer}>
-            <ThemedText type="title">{title}</ThemedText>
+            {typeof title === 'string' ? (
+              <ThemedText type="title">{title}</ThemedText>
+            ) : (
+              title
+            )}
             {subtitle && (
               <ThemedText style={styles.subtitle}>{subtitle}</ThemedText>
             )}
