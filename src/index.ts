@@ -1,23 +1,9 @@
-// Types
-export * from './types';
-
-// Atoms
 export * from './atoms';
-
-// Molecules
-export * from './molecules';
-
-// Organisms
-export * from './organisms';
-
-// Templates
-export * from './templates';
-
-// Screens
-export * from './screens';
-
-// Hooks
 export * from './hooks';
-
-// Utils
+export * from './molecules';
+export * from './organisms';
+export * from './screens';
+export * from './templates';
+export * from './types';
 export * from './utils';
+

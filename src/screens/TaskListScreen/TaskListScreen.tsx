@@ -27,6 +27,7 @@ export const TaskListScreen: React.FC = () => {
     <PageTemplate
       title="Minhas Tarefas"
       subtitle={`${stats.pending} pendentes de ${stats.total}`}
+      showLogout={true}
     >
       <TaskList
         tasks={tasks}
