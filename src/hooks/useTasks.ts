@@ -95,8 +95,24 @@ export const useTasks = () => {
 
   // Deletar tarefa
   const deleteTask = async (taskId: string): Promise<void> => {
-    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
+    console.log('[deleteTask] Tentando deletar tarefa com id:', taskId);
+  
+    setTasks(prevTasks => {
+      console.log('[deleteTask] Tasks antes de deletar:', prevTasks);
+      const newTasks = prevTasks.filter(task => task.id !== taskId);
+      console.log('[deleteTask] Tasks após deletar:', newTasks);
+  
+      // Salvar no AsyncStorage com as tarefas atualizadas
+      saveTasks(newTasks).catch(err => {
+        console.error('[deleteTask] Erro ao salvar tarefas:', err);
+      });
+  
+      return newTasks;
+    });
   };
+  
+  
+  
 
   // Buscar tarefa por ID
   const getTaskById = (taskId: string): Task | undefined => {

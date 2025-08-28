@@ -1,8 +1,8 @@
-import React from 'react';
-import { FlatList, Alert, RefreshControl, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
-import { TaskItem, EmptyState } from '@/src/molecules';
+import { EmptyState, TaskItem } from '@/src/molecules';
 import { Task } from '@/src/types';
+import { router } from 'expo-router';
+import React from 'react';
+import { Alert, FlatList, RefreshControl, StyleSheet } from 'react-native';
 
 export interface TaskListProps {
   tasks: Task[];
@@ -25,7 +25,7 @@ export const TaskList: React.FC<TaskListProps> = ({
 
   const handleDeleteTask = (taskId: string) => {
     Alert.alert(
-      'Deletar Tarefa',
+      'Deletar Taref1234a',
       'Tem certeza que deseja deletar esta tarefa?',
       [
         { text: 'Cancelar', style: 'cancel' },

@@ -91,31 +91,22 @@ export const TaskDetailsScreen: React.FC = () => {
   //   }
   // };
 
-  const handleDeleteTask = () => {
+  const handleDeleteTask = async () => {
     if (!task) return;
-
-    Alert.alert(
-      'Deletar Tarefa',
-      'Tem certeza que deseja deletar esta tarefa? Esta ação não pode ser desfeita.',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Deletar',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await deleteTask(task.id);
-              router.back();
-            } catch (error) {
-              console.error('Erro ao deletar tarefa:', error);
-              Alert.alert('Erro', 'Não foi possível deletar a tarefa.');
-            }
-          },
-        },
-      ]
-    );
+  
+    console.log('Deletando tarefa diretamente:', task);
+  
+    try {
+      await deleteTask(task.id);
+      console.log('Tarefa deletada com sucesso:', task.id);
+      router.back();
+    } catch (error) {
+      console.error('Erro ao deletar tarefa:', error);
+      Alert.alert('Erro', 'Não foi possível deletar a tarefa.');
+    }
   };
-
+  
+  
   const cancelEdit = () => {
     if (task) {
       setTitle(task.title);
@@ -306,6 +297,7 @@ export const TaskDetailsScreen: React.FC = () => {
               />
             </ThemedView>
           </>
+           
         ) : (
           <Button
             title="Deletar Tarefa"
@@ -313,6 +305,7 @@ export const TaskDetailsScreen: React.FC = () => {
             onPress={handleDeleteTask}
             fullWidth
           />
+          
         )}
       </ThemedView>
     </KeyboardAvoidingView>
